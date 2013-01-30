@@ -73,7 +73,7 @@ module Rack
 
     def precache_key!
       hash = @config.cache.sort!.map do |item|
-        path = @root.join(item)
+        path = Pathname.new(@root.to_s + item)
         Digest::SHA2.hexdigest(path.read) if ::File.file?(path)
       end
 
